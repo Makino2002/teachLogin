@@ -1,18 +1,3 @@
-// Khi load trang, kiểm tra nếu đã đăng nhập
-document.addEventListener("DOMContentLoaded", () => {
-  const savedUser = localStorage.getItem("loggedInUser");
-  if (savedUser) {
-    showHome(savedUser);
-  }
-});
-
-// // Elements
-const loginBox = document.getElementById("login-box");
-const registerBox = document.getElementById("register-box");
-const homeBox = document.getElementById("home-box");
-const displayUser = document.getElementById("displayUser");
-
-/* ========= ĐĂNG KÝ ========= */
 if (document.getElementById("registerBtn")) {
   document.getElementById("registerBtn").onclick = () => {
     const username = document.getElementById("reg-username").value.trim();
@@ -25,7 +10,6 @@ if (document.getElementById("registerBtn")) {
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // kiểm tra trùng user
     if (users.some((u) => u.username === username)) {
       alert("Tên đăng nhập đã tồn tại!");
       return;
@@ -39,7 +23,6 @@ if (document.getElementById("registerBtn")) {
   };
 }
 
-/* ========= ĐĂNG NHẬP ========= */
 if (document.getElementById("loginBtn")) {
   document.getElementById("loginBtn").onclick = () => {
     const username = document.getElementById("username").value.trim();
@@ -58,15 +41,13 @@ if (document.getElementById("loginBtn")) {
 
     localStorage.setItem("loggedInUser", username);
 
-    window.location.href = "home.html"; // chuyển sang trang home riêng
+    window.location.href = "index.html";
   };
 }
 
-/* ========= TRANG HOME ========= */
 if (document.getElementById("displayUser")) {
   const user = localStorage.getItem("loggedInUser");
 
-  // Nếu chưa đăng nhập → quay về login
   if (!user) {
     window.location.href = "login.html";
   }
